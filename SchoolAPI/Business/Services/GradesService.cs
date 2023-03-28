@@ -6,52 +6,52 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAPI.Business.Services;
 
-public class GradesService : IServiceDefault<Grades>
+public class GradesService : IGradesService
 {
     private readonly IGradesRepository _repository;
 
     public GradesService(IGradesRepository repository) => (_repository) = (repository);
-    
-    public bool Delete(Grades obj)
+
+    public async Task<bool> Delete(Grades obj)
     {
         if (obj.Id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        _repository.Delete(obj);
+        await _repository.Delete(obj);
 
         return obj.Id > 0 ? true : false;
     }
 
-    public ICollection<Grades> GetAll()
+    public async Task<ICollection<Grades>> GetAll()
     {
-        return _repository.GetAll();
+        return await _repository.GetAll();
     }
 
-    public Grades GetById(int id)
+    public async Task<Grades> GetById(int id)
     {
         if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        return _repository.GetById(id);
+        return await _repository.GetById(id);
     }
 
-    public ICollection<Grades> GetSearch(string value)
+    public async Task<ICollection<Grades>> GetSearch(string value)
     {
-        return _repository.GetSearch(value);
+        return await _repository.GetSearch(value);
     }
 
-    public bool Post(Grades obj)
+    public async Task<bool> Post(Grades obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        _repository.Post(obj);
+        await _repository.Post(obj);
 
         return obj.Id > 0 ? true : false;
     }
 
-    public bool Put(Grades obj)
+    public async Task<bool> Put(Grades obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        _repository.Put(obj);
+        await _repository.Put(obj);
 
         return obj.Id > 0 ? true : false;
     }

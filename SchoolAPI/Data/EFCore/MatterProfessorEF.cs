@@ -10,47 +10,47 @@ public class MatterProfessorEF : IMatterProfessorRepository
 
     public MatterProfessorEF(SchoolContext context) => (_context) = (context);
 
-    public void Delete(MatterProfessor obj)
+    public async Task Delete(MatterProfessor obj)
     {
         _context.Remove(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public ICollection<MatterProfessor> GetAll()
+    public async Task<ICollection<MatterProfessor>> GetAll()
     {
-        return _context.MatterProfessors
+        return await _context.MatterProfessors
             .Include(x => x.Matter)
             .Include(x => x.Professor)
-             .ToList();
+             .ToListAsync();
     }
 
-    public MatterProfessor GetById(int id)
+    public async Task<MatterProfessor> GetById(int id)
     {
-        return _context.MatterProfessors
+        return await _context.MatterProfessors
           .Include(x => x.Matter)
           .Include(x => x.Professor)
-           .First(x => x.Id == id);
+           .FirstAsync(x => x.Id == id);
     }
 
-    public ICollection<MatterProfessor> GetSearch(string value)
+    public async Task<ICollection<MatterProfessor>> GetSearch(string value)
     {
-        return _context.MatterProfessors
+        return await _context.MatterProfessors
           .Include(x => x.Matter)
           .Include(x => x.Professor)
           .Where(x => x.Matter.Name.Contains(value) ||
           x.Professor.Name.Contains(value))
-           .ToList();
+           .ToListAsync();
     }
 
-    public void Post(MatterProfessor obj)
+    public async Task Post(MatterProfessor obj)
     {
         _context.Add(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Put(MatterProfessor obj)
+    public async Task Put(MatterProfessor obj)
     {
         _context.Update(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

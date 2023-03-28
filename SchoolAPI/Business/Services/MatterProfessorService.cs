@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAPI.Business.Services;
 
-public class StudentService : IStudentService
+public class MatterProfessorService : IMatterProfessorService
 {
-    private readonly IStudentRepository _repository;
+    private readonly IMatterProfessorRepository _repository;
 
-    public StudentService(IStudentRepository repository) => (_repository) = (repository);
+    public MatterProfessorService(IMatterProfessorRepository repository) => (_repository) = (repository);
 
-    public async Task<bool> Delete(Student obj)
+    public async Task<bool> Delete(MatterProfessor obj)
     {
         if (obj.Id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
@@ -21,24 +21,24 @@ public class StudentService : IStudentService
         return obj.Id > 0 ? true : false;
     }
 
-    public async Task<ICollection<Student>> GetAll()
+    public async Task<ICollection<MatterProfessor>> GetAll()
     {
         return await _repository.GetAll();
     }
 
-    public async Task<Student> GetById(int id)
+    public async Task<MatterProfessor> GetById(int id)
     {
         if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
         return await _repository.GetById(id);
     }
 
-    public async Task<ICollection<Student>> GetSearch(string value)
+    public async Task<ICollection<MatterProfessor>> GetSearch(string value)
     {
         return await _repository.GetSearch(value);
     }
 
-    public async Task<bool> Post(Student obj)
+    public async Task<bool> Post(MatterProfessor obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
@@ -47,7 +47,7 @@ public class StudentService : IStudentService
         return obj.Id > 0 ? true : false;
     }
 
-    public async Task<bool> Put(Student obj)
+    public async Task<bool> Put(MatterProfessor obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 

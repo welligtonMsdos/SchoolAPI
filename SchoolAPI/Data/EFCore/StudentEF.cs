@@ -10,43 +10,43 @@ public class StudentEF : IStudentRepository
 
     public StudentEF(SchoolContext context) => (_context) = (context);
 
-    public void Delete(Student obj)
+    public async Task Delete(Student obj)
     {
         _context.Remove(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public ICollection<Student> GetAll()
+    public async Task<ICollection<Student>> GetAll()
     {
-        return _context.Students
+        return await _context.Students
             .Include(x=>x.Grades)
-            .ToList();
+            .ToListAsync();
     }
 
-    public Student GetById(int id)
+    public async Task<Student> GetById(int id)
     {
-        return _context.Students
+        return await _context.Students
             .Include(x => x.Grades)
-            .First(x => x.Id == id);
+            .FirstAsync(x => x.Id == id);
     }
 
-    public ICollection<Student> GetSearch(string value)
+    public async Task<ICollection<Student>> GetSearch(string value)
     {
-        return _context.Students
+        return await _context.Students
             .Include(x => x.Grades)
             .Where(x=>x.Name.Contains(value))
-            .ToList();
+            .ToListAsync();
     }
 
-    public void Post(Student obj)
+    public async Task Post(Student obj)
     {
         _context.Add(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Put(Student obj)
+    public async Task Put(Student obj)
     {
         _context.Update(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

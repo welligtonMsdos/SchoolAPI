@@ -2,7 +2,7 @@
 
 public interface ICommand<T>
 {
-    void Post(T obj);
-    void Put(T obj);
-    void Delete(T obj);
+    Task Post(T obj);
+    Task Put(T obj);
+    Task Delete(T obj);
 }

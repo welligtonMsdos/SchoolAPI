@@ -1,4 +1,5 @@
-﻿using SchoolAPI.Data.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAPI.Data.Model;
 using SchoolAPI.Data.Repository;
 
 namespace SchoolAPI.Data.EFCore;
@@ -9,42 +10,40 @@ public class AddressEF : IAddressRepository
 
     public AddressEF(SchoolContext context) => (_context) = (context);
 
-    public void Delete(Address obj)
+    public async Task Delete(Address obj)
     {
         _context.Remove(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public ICollection<Address> GetAll()
+    public async Task<ICollection<Address>> GetAll()
     {
-        return _context.Address
-            .ToList();
+        return await _context.Address.ToListAsync();
     }
 
-    public Address GetById(int id)
+    public async Task<Address> GetById(int id)
     {
-        return _context.Address
-             .First(x => x.Id == id);
+        return await _context.Address.FirstAsync(x => x.Id == id);
     }
 
-    public ICollection<Address> GetSearch(string value)
+    public async Task<ICollection<Address>> GetSearch(string value)
     {
-        return _context.Address
+        return await _context.Address
              .Where(x => x.Cep.Contains(value) ||
               x.Neighborhood.Contains(value) ||
               x.City.Contains(value))
-             .ToList();
+             .ToListAsync();
     }
 
-    public void Post(Address obj)
+    public async Task Post(Address obj)
     {
         _context.Add(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Put(Address obj)
+    public async Task Put(Address obj)
     {
         _context.Update(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

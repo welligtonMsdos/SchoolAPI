@@ -10,47 +10,47 @@ public class GradesEF : IGradesRepository
 
     public GradesEF(SchoolContext context) => (_context) = (context);
 
-    public void Delete(Grades obj)
+    public async Task Delete(Grades obj)
     {
         _context.Remove(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public ICollection<Grades> GetAll()
+    public async Task<ICollection<Grades>> GetAll()
     {
-        return _context.Grades
+        return await _context.Grades
             .Include(x => x.Students)
             .Include(x => x.Matters)
-            .ToList();
+            .ToListAsync();
     }
 
-    public Grades GetById(int id)
+    public async Task<Grades> GetById(int id)
     {
-        return _context.Grades
+        return await _context.Grades
             .Include(x => x.Students)
             .Include(x => x.Matters)
-           .First(x => x.Id == id);
+           .FirstAsync(x => x.Id == id);
     }
 
-    public ICollection<Grades> GetSearch(string value)
+    public async Task<ICollection<Grades>> GetSearch(string value)
     {
-        return _context.Grades
+        return await _context.Grades
            .Include(x => x.Students)
            .Include(x => x.Matters)
            .Where(x => x.Students.Name.Contains(value) || 
            x.Matters.Name.Contains(value))
-           .ToList();
+           .ToListAsync();
     }
 
-    public void Post(Grades obj)
+    public async Task Post(Grades obj)
     {
         _context.Add(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Put(Grades obj)
+    public async Task Put(Grades obj)
     {
         _context.Update(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

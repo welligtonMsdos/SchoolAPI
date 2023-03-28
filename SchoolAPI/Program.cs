@@ -1,6 +1,8 @@
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using SchoolAPI;
 using SchoolAPI.Data.EFCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,19 @@ builder.Services.AddDbContext<SchoolContext>(options => options.UseSqlServer(con
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "SchoolAPI",
+        Version = "v1"
+    });
+ 
+});
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddInterfaces(builder.Configuration);
 
 var app = builder.Build();
 

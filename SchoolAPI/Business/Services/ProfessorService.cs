@@ -6,52 +6,52 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAPI.Business.Services;
 
-public class ProfessorService : IServiceDefault<Professor>
+public class ProfessorService : IProfessorService
 {
     private readonly IProfessorRepository _repository;
 
     public ProfessorService(IProfessorRepository repository) => (_repository) = (repository);
-    
-    public bool Delete(Professor obj)
+
+    public async Task<bool> Delete(Professor obj)
     {
         if (obj.Id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        _repository.Delete(obj);
+        await _repository.Delete(obj);
 
         return obj.Id > 0 ? true : false;
     }
 
-    public ICollection<Professor> GetAll()
+    public async Task<ICollection<Professor>> GetAll()
     {
-        return _repository.GetAll();
+        return await _repository.GetAll();
     }
 
-    public Professor GetById(int id)
+    public async Task<Professor> GetById(int id)
     {
         if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        return _repository.GetById(id);
+        return await _repository.GetById(id);
     }
 
-    public ICollection<Professor> GetSearch(string value)
+    public async Task<ICollection<Professor>> GetSearch(string value)
     {
-        return _repository.GetSearch(value);
+        return await _repository.GetSearch(value);
     }
 
-    public bool Post(Professor obj)
+    public async Task<bool> Post(Professor obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        _repository.Post(obj);
+        await _repository.Post(obj);
 
         return obj.Id > 0 ? true : false;
     }
 
-    public bool Put(Professor obj)
+    public async Task<bool> Put(Professor obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        _repository.Put(obj);
+        await _repository.Put(obj);
 
         return obj.Id > 0 ? true : false;
     }

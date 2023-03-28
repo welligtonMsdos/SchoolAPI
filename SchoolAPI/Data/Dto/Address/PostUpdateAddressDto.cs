@@ -1,21 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAPI.Data.Model;
+namespace SchoolAPI.Data.Dto.Address;
 
-public class Address
-{  
-    public Address(int id, string cep, string street, string number, string neighborhood, string city, string uf)
-    {
-        Id = id;
-        Cep = cep;
-        Street = street;
-        Number = number;
-        Neighborhood = neighborhood;
-        City = city;
-        Uf = uf;
-    }
-
-    [Key]   
+public class PostUpdateAddressDto
+{
     public int Id { get; set; }
 
     [Required(ErrorMessage = "{0} is required")]
@@ -48,6 +36,4 @@ public class Address
     [MaxLength(2)]
     [RegularExpression(@"[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", ErrorMessage = "Use only alphabetic characters")]
     public string Uf { get; set; }
-
-    public ICollection<Student> Students { get; set; }
 }

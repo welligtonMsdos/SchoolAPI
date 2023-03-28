@@ -2,7 +2,7 @@
 
 public interface IQuery<T>
 {
-    ICollection<T> GetAll();
-    ICollection<T> GetSearch(string value);
-    T GetById(int id);
+    Task<ICollection<T>> GetAll();
+    Task<ICollection<T>> GetSearch(string value);
+    Task<T> GetById(int id);
 }

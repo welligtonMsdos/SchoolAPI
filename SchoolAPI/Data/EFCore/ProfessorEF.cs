@@ -10,43 +10,43 @@ public class ProfessorEF : IProfessorRepository
 
     public ProfessorEF(SchoolContext context) => (_context) = (context);
     
-    public void Delete(Professor obj)
+    public async Task Delete(Professor obj)
     {
         _context.Remove(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public ICollection<Professor> GetAll()
+    public async Task<ICollection<Professor>> GetAll()
     {
-        return _context.professors
+        return await _context.professors
             .Include(x=>x.matterProfessors)
-            .ToList();
+            .ToListAsync();
     }
 
-    public Professor GetById(int id)
+    public async Task<Professor> GetById(int id)
     {
-        return _context.professors
+        return await _context.professors
             .Include(x => x.matterProfessors)
-            .First(x => x.Id == id);
+            .FirstAsync(x => x.Id == id);
     }
 
-    public ICollection<Professor> GetSearch(string value)
+    public async Task<ICollection<Professor>> GetSearch(string value)
     {
-        return _context.professors
+        return await _context.professors
            .Include(x => x.matterProfessors)
            .Where(x => x.Name.Contains(value))
-           .ToList();
+           .ToListAsync();
     }
 
-    public void Post(Professor obj)
+    public async Task Post(Professor obj)
     {
         _context.Add(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Put(Professor obj)
+    public async Task Put(Professor obj)
     {
         _context.Update(obj);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

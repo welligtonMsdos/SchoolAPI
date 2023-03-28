@@ -2,10 +2,10 @@
 
 public interface IServiceDefault<T>
 {
-    ICollection<T> GetAll();
-    ICollection<T> GetSearch(string value);
-    T GetById(int id);
-    bool Post(T obj);
-    bool Put(T obj);
-    bool Delete(T obj);
+    Task<ICollection<T>> GetAll();
+    Task<ICollection<T>> GetSearch(string value);
+    Task<T> GetById(int id);
+    Task<bool> Post(T obj);
+    Task<bool> Put(T obj);
+    Task<bool> Delete(T obj);
 }

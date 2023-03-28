@@ -6,52 +6,52 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAPI.Business.Services;
 
-public class AddressService : IServiceDefault<Address>
+public class AddressService : IAddressService
 {
     private readonly IAddressRepository _repository;
 
     public AddressService(IAddressRepository repository) => (_repository) = (repository);
     
-    public bool Delete(Address obj)
+    public async Task<bool> Delete(Address obj)
     {
         if (obj.Id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        _repository.Delete(obj);
+        await _repository.Delete(obj);
 
         return obj.Id > 0 ? true : false;
     }
 
-    public ICollection<Address> GetAll()
+    public async Task<ICollection<Address>> GetAll()
     {
-        return _repository.GetAll();
+        return await _repository.GetAll();
     }
 
-    public Address GetById(int id)
+    public async Task<Address> GetById(int id)
     {
         if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        return _repository.GetById(id);
+        return await _repository.GetById(id);
     }
 
-    public ICollection<Address> GetSearch(string value)
+    public async Task<ICollection<Address>> GetSearch(string value)
     {
-        return _repository.GetSearch(value);
+        return await _repository.GetSearch(value);
     }
 
-    public bool Post(Address obj)
+    public async Task<bool> Post(Address obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        _repository.Post(obj);
+        await _repository.Post(obj);
 
         return obj.Id > 0 ? true : false;
     }
 
-    public bool Put(Address obj)
+    public async Task<bool> Put(Address obj)
     {
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
-        _repository.Put(obj);
+        await _repository.Put(obj);
 
         return obj.Id > 0 ? true : false;
     }
