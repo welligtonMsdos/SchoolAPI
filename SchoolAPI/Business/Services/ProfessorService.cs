@@ -12,11 +12,13 @@ public class ProfessorService : IProfessorService
 
     public ProfessorService(IProfessorRepository repository) => (_repository) = (repository);
 
-    public async Task<bool> Delete(Professor obj)
+    public async Task<bool> Delete(int id)
     {
-        if (obj.Id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
+        if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
 
-        await _repository.Delete(obj);
+        var obj = _repository.GetById(id);
+
+        await _repository.Delete(await obj);
 
         return obj.Id > 0 ? true : false;
     }

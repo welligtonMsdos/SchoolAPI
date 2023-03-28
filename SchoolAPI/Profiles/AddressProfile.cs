@@ -9,5 +9,6 @@ public class AddressProfile: Profile
     public AddressProfile()
     {
         CreateMap<ReadAddressDto, Address>().ReverseMap();
+        CreateMap<PostUpdateAddressDto, Address>().ReverseMap();
     }
 }

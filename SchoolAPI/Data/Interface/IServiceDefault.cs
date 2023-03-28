@@ -7,5 +7,5 @@ public interface IServiceDefault<T>
     Task<T> GetById(int id);
     Task<bool> Post(T obj);
     Task<bool> Put(T obj);
-    Task<bool> Delete(T obj);
+    Task<bool> Delete(int id);
 }
