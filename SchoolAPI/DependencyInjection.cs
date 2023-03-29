@@ -21,6 +21,12 @@ public static class DependencyInjection
         services.AddScoped<IMatterRepository, MatterEF>();
         services.AddScoped<IMatterService, MatterService>();
 
+        services.AddScoped<IProfessorRepository, ProfessorEF>();
+        services.AddScoped<IProfessorService, ProfessorService>();
+
+        services.AddScoped<IMatterProfessorRepository, MatterProfessorEF>();
+        services.AddScoped<IMatterProfessorService, MatterProfessorService>();
+
         return services;
     }
 }

@@ -19,7 +19,7 @@ public class ProfessorEF : IProfessorRepository
     public async Task<ICollection<Professor>> GetAll()
     {
         return await _context.professors
-            .Include(x=>x.matterProfessors)
+            .Include(x=>x.matterProfessors)            
             .ToListAsync();
     }
 

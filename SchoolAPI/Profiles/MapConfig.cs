@@ -2,6 +2,8 @@
 using SchoolAPI.Data.Dto.Address;
 using SchoolAPI.Data.Dto.Grades;
 using SchoolAPI.Data.Dto.Matter;
+using SchoolAPI.Data.Dto.MatterProfessor;
+using SchoolAPI.Data.Dto.Professor;
 using SchoolAPI.Data.Dto.Student;
 using SchoolAPI.Data.Model;
 
@@ -48,6 +50,25 @@ public class MapConfig: Profile
 
         CreateMap<Matter, ReadMatterDto>().ReverseMap();
         CreateMap<Matter, PostUpdateMatterDto>().ReverseMap();
+
+        #endregion
+
+        #region Professor
+
+        CreateMap<Professor, ReadProfessorDto>().ReverseMap();
+
+        CreateMap<PostUpdateProfessorDto, Professor>().ReverseMap();
+
+        #endregion
+
+        #region MatterProfessor
+
+        CreateMap<MatterProfessor, ReadMatterProfessorDto>()
+            .ForMember(x => x.ProfessorName, x => x.MapFrom(x => x.Professor.Name))
+            .ForMember(x => x.MatterName, x => x.MapFrom(x => x.Matter.Name))
+            .ReverseMap();
+
+        CreateMap<PostUpdateMatterProfessorDto, MatterProfessor>().ReverseMap();
 
         #endregion
     }
