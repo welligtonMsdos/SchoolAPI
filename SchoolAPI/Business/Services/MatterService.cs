@@ -51,6 +51,8 @@ public class MatterService : IMatterService
 
     public async Task<bool> Put(Matter obj)
     {
+        if (obj.Id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
+
         Validator.ValidateObject(obj, new ValidationContext(obj), true);
 
         await _repository.Put(obj);

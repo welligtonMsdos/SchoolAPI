@@ -12,6 +12,15 @@ public static class DependencyInjection
         services.AddScoped<IAddressRepository, AddressEF>();
         services.AddScoped<IAddressService, AddressService>();
 
+        services.AddScoped<IGradesRepository, GradesEF>();
+        services.AddScoped<IGradesService, GradesService>();
+
+        services.AddScoped<IStudentRepository, StudentEF>();
+        services.AddScoped<IStudentService, StudentService>();
+
+        services.AddScoped<IMatterRepository, MatterEF>();
+        services.AddScoped<IMatterService, MatterService>();
+
         return services;
     }
 }

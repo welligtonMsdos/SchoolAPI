@@ -19,7 +19,8 @@ public class StudentEF : IStudentRepository
     public async Task<ICollection<Student>> GetAll()
     {
         return await _context.Students
-            .Include(x=>x.Grades)
+            .Include(x => x.Grades)
+            .Include(x => x.Address)
             .ToListAsync();
     }
 
@@ -27,6 +28,7 @@ public class StudentEF : IStudentRepository
     {
         return await _context.Students
             .Include(x => x.Grades)
+            .Include(x => x.Address)
             .FirstAsync(x => x.Id == id);
     }
 
@@ -34,6 +36,7 @@ public class StudentEF : IStudentRepository
     {
         return await _context.Students
             .Include(x => x.Grades)
+            .Include(x => x.Address)
             .Where(x=>x.Name.Contains(value))
             .ToListAsync();
     }

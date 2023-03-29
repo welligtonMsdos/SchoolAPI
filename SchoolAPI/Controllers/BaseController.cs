@@ -11,7 +11,8 @@ public abstract class BaseController : ControllerBase
     {
         if(result.ToString().Contains("error") || 
            result.ToString().Contains("mapping") ||
-           result.ToString().Contains("Sequence"))
+           result.ToString().Contains("Sequence") ||
+           result.ToString().Contains("cannot"))
         {
             return Ok(new
             {
