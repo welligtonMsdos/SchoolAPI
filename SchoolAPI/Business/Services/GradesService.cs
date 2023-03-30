@@ -35,6 +35,13 @@ public class GradesService : IGradesService
         return await _repository.GetById(id);
     }
 
+    public async Task<ICollection<Grades>> GetGradesByStudentId(int studentId)
+    {
+        if (studentId == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
+
+        return await _repository.GetGradesByStudentId(studentId);
+    }
+
     public async Task<ICollection<Grades>> GetSearch(string value)
     {
         return await _repository.GetSearch(value);

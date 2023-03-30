@@ -42,6 +42,19 @@ public class GradesController : BaseController
         }
     }
 
+    [HttpGet("[Action]/{studentId}")]
+    public async Task<ActionResult> GetGradesByStudentId(int studentId)
+    {
+        try
+        {
+            return Ok(_mapper.Map<ICollection<ReadGradesByStudentIdDto>>(await _service.GetGradesByStudentId(studentId)));
+        }
+        catch (Exception ex)
+        {
+            return Response(ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<PostUpdateGradesDto>> Post([FromBody] PostUpdateGradesDto model)
     {

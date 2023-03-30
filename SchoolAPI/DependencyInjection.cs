@@ -2,6 +2,7 @@
 using SchoolAPI.Data.EFCore;
 using SchoolAPI.Data.Interface;
 using SchoolAPI.Data.Repository;
+using SchoolAPI.Profiles;
 
 namespace SchoolAPI;
 

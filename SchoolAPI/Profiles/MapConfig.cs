@@ -6,10 +6,12 @@ using SchoolAPI.Data.Dto.MatterProfessor;
 using SchoolAPI.Data.Dto.Professor;
 using SchoolAPI.Data.Dto.Student;
 using SchoolAPI.Data.Model;
+using System.Reflection;
+using System.Xml;
 
 namespace SchoolAPI.Profiles;
 
-public class MapConfig: Profile
+public class MapConfig : Profile
 {
     public MapConfig()
     {
@@ -28,6 +30,13 @@ public class MapConfig: Profile
             .ReverseMap();
 
         CreateMap<PostUpdateGradesDto, Grades>().ReverseMap();
+
+        CreateMap<Grades, ReadGradesByStudentIdDto>()
+            .ForMember(x => x.StudentName, x => x.MapFrom(x => x.Students.Name))
+            .ForMember(x => x.MatterName, x => x.MapFrom(x => x.Matters.Name))
+            .ForMember(x => x.Gpa, x => x.MapFrom(x => ((x.Grades1 + x.Grades2 + x.Grades3 + x.Grades4) / 4)))
+            .ForMember(x => x.Status, x => x.MapFrom(x => ((x.Grades1 + x.Grades2 + x.Grades3 + x.Grades4) / 4) >= 5 ? "approved" : "failed"))
+            .ReverseMap();
 
         #endregion
 
@@ -73,3 +82,4 @@ public class MapConfig: Profile
         #endregion
     }
 }
+

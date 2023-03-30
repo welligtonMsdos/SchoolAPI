@@ -5,4 +5,5 @@ namespace SchoolAPI.Data.Repository;
 
 public interface IGradesRepository : IQuery<Grades>, ICommand<Grades>
 {
+    Task<ICollection<Grades>> GetGradesByStudentId(int studentId);
 }
