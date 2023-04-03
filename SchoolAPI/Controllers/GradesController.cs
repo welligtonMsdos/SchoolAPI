@@ -16,6 +16,10 @@ public class GradesController : BaseController
 
     public GradesController(IGradesService service, IMapper mapper) => (_service,_mapper) = (service,mapper);
 
+    /// <summary>
+    /// returns all student grades
+    /// </summary>
+    /// <returns>ActionResult</returns>
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
@@ -29,6 +33,11 @@ public class GradesController : BaseController
         }
     }
 
+    /// <summary>
+    /// returns all student grades by grade id
+    /// </summary>
+    /// <param name="id">grades id</param>
+    /// <returns>IActionResult</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -42,6 +51,11 @@ public class GradesController : BaseController
         }
     }
 
+    /// <summary>
+    /// returns all grades by studentId
+    /// </summary>
+    /// <param name="id">student id</param>
+    /// <returns>IActionResult</returns>
     [HttpGet("[Action]/{studentId}")]
     public async Task<ActionResult> GetGradesByStudentId(int studentId)
     {
@@ -55,6 +69,12 @@ public class GradesController : BaseController
         }
     }
 
+    /// <summary>
+    /// add student grades
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">Insert successfully</response>
     [HttpPost]
     public async Task<ActionResult<PostUpdateGradesDto>> Post([FromBody] PostUpdateGradesDto model)
     {
@@ -74,6 +94,12 @@ public class GradesController : BaseController
         }
     }
 
+    /// <summary>
+    /// updates student grades
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">updated successfully</response>
     [HttpPut]
     public async Task<ActionResult<PostUpdateGradesDto>> Put([FromBody] PostUpdateGradesDto model)
     {
@@ -93,6 +119,11 @@ public class GradesController : BaseController
         }
     }
 
+    /// <summary>
+    /// delete student grades
+    /// </summary>
+    /// <param name="id">address id</param>
+    /// <returns>ActionResult</returns>
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {

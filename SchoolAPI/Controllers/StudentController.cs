@@ -16,6 +16,10 @@ public class StudentController : BaseController
 
     public StudentController(IStudentService service, IMapper mapper) => (_service,_mapper) = (service,mapper);
 
+    /// <summary>
+    /// returns all students
+    /// </summary>
+    /// <returns>ActionResult</returns>
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
@@ -29,6 +33,11 @@ public class StudentController : BaseController
         }
     }
 
+    /// <summary>
+    /// returns all students by id
+    /// </summary>
+    /// <param name="id">students id</param>
+    /// <returns>IActionResult</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -42,6 +51,12 @@ public class StudentController : BaseController
         }
     }
 
+    /// <summary>
+    /// Add an student
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">Insert successfully</response>
     [HttpPost]
     public async Task<ActionResult<PostUpdateStudentDto>> Post([FromBody] PostUpdateStudentDto model)
     {
@@ -61,6 +76,12 @@ public class StudentController : BaseController
         }
     }
 
+    /// <summary>
+    /// updates an student
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">updated successfully</response>
     [HttpPut]
     public async Task<ActionResult<PostUpdateStudentDto>> Put([FromBody] PostUpdateStudentDto model)
     {
@@ -80,6 +101,11 @@ public class StudentController : BaseController
         }
     }
 
+    /// <summary>
+    /// delete an student
+    /// </summary>
+    /// <param name="id">student id</param>
+    /// <returns>ActionResult</returns>
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {

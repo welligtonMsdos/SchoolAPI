@@ -16,6 +16,10 @@ public class MatterController : BaseController
 
     public MatterController(IMatterService service, IMapper mapper) => (_service, _mapper) = (service, mapper);
 
+    /// <summary>
+    /// returns all matteres
+    /// </summary>
+    /// <returns>ActionResult</returns>
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
@@ -29,6 +33,11 @@ public class MatterController : BaseController
         }
     }
 
+    /// <summary>
+    /// returns all matteres by id
+    /// </summary>
+    /// <param name="id">matter id</param>
+    /// <returns>IActionResult</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -42,6 +51,12 @@ public class MatterController : BaseController
         }
     }
 
+    /// <summary>
+    /// Add an matter
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">Insert successfully</response>
     [HttpPost]
     public async Task<ActionResult<PostUpdateMatterDto>> Post([FromBody] PostUpdateMatterDto model)
     {
@@ -61,6 +76,12 @@ public class MatterController : BaseController
         }
     }
 
+    /// <summary>
+    /// updates an matter
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">updated successfully</response>
     [HttpPut]
     public async Task<ActionResult<PostUpdateMatterDto>> Put([FromBody] PostUpdateMatterDto model)
     {
@@ -80,6 +101,11 @@ public class MatterController : BaseController
         }
     }
 
+    /// <summary>
+    /// delete an matter
+    /// </summary>
+    /// <param name="id">matter id</param>
+    /// <returns>ActionResult</returns>
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {

@@ -16,6 +16,10 @@ public class AddressController : BaseController
 
     public AddressController(IAddressService service, IMapper mapper) => (_service,_mapper) = (service,mapper);
 
+    /// <summary>
+    /// returns all addresses
+    /// </summary>
+    /// <returns>ActionResult</returns>
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
@@ -29,6 +33,11 @@ public class AddressController : BaseController
         }
     }
 
+    /// <summary>
+    /// returns all addresses by id
+    /// </summary>
+    /// <param name="id">address id</param>
+    /// <returns>IActionResult</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {        
@@ -42,6 +51,12 @@ public class AddressController : BaseController
         }
     }
 
+    /// <summary>
+    /// Add an address
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">Insert successfully</response>
     [HttpPost]
     public async Task<ActionResult<PostUpdateAddressDto>> Post([FromBody] PostUpdateAddressDto model)
     {
@@ -61,6 +76,12 @@ public class AddressController : BaseController
         }
     }
 
+    /// <summary>
+    /// updates an address
+    /// </summary>
+    /// <param name="model">object with the required fields</param>
+    /// <returns>ActionResult</returns>
+    /// <response code="200">updated successfully</response>
     [HttpPut]
     public async Task<ActionResult<PostUpdateAddressDto>> Put([FromBody] PostUpdateAddressDto model)
     {
@@ -80,6 +101,11 @@ public class AddressController : BaseController
         }
     }
 
+    /// <summary>
+    /// delete an address
+    /// </summary>
+    /// <param name="id">address id</param>
+    /// <returns>ActionResult</returns>
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
