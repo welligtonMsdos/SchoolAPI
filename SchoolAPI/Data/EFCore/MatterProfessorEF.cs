@@ -53,4 +53,13 @@ public class MatterProfessorEF : IMatterProfessorRepository
         _context.Update(obj);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<ICollection<MatterProfessor>> GetByProfessorId(int professorId)
+    {
+        return await _context.MatterProfessors
+       .Include(x => x.Matter)
+       .Include(x => x.Professor)
+       .Where(x => x.ProfessorId == professorId)
+       .ToListAsync();
+    }
 }

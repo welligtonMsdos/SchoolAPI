@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SchoolAPI.Business.Enum;
 using SchoolAPI.Data.Dto.MatterProfessor;
@@ -44,6 +45,24 @@ public class MatterProfessorController : BaseController
         try
         {
             return Ok(_mapper.Map<ReadMatterProfessorDto>(await _service.GetById(id)));
+        }
+        catch (Exception ex)
+        {
+            return Response(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// returns all matteres and professors by professor id
+    /// </summary>
+    /// <param name="professorId">professor id</param>
+    /// <returns>ActionResult</returns>
+    [HttpGet("[Action]/{professorId}")]
+    public async Task<ActionResult> GetByProfessorId(int professorId)
+    {
+        try
+        {
+            return Ok(_mapper.Map<ICollection<ReadMatterProfessorDto>>(await _service.GetByProfessorId(professorId)));
         }
         catch (Exception ex)
         {

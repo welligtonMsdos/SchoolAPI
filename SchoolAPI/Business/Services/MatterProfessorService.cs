@@ -2,7 +2,6 @@
 using SchoolAPI.Data.Interface;
 using SchoolAPI.Data.Model;
 using SchoolAPI.Data.Repository;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAPI.Business.Services;
@@ -68,5 +67,12 @@ public class MatterProfessorService : IMatterProfessorService
         await _repository.Put(obj);
 
         return obj.Id > 0 ? true : false;
+    }
+
+    public async Task<ICollection<MatterProfessor>> GetByProfessorId(int professorId)
+    {
+        if (professorId == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
+
+        return await _repository.GetByProfessorId(professorId);
     }
 }
