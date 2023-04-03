@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SchoolAPI;
 using SchoolAPI.Data.EFCore;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

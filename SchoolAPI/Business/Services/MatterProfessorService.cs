@@ -2,6 +2,7 @@
 using SchoolAPI.Data.Interface;
 using SchoolAPI.Data.Model;
 using SchoolAPI.Data.Repository;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAPI.Business.Services;
@@ -9,18 +10,27 @@ namespace SchoolAPI.Business.Services;
 public class MatterProfessorService : IMatterProfessorService
 {
     private readonly IMatterProfessorRepository _repository;
+    private readonly IGradesRepository _gradeRepository;
 
-    public MatterProfessorService(IMatterProfessorRepository repository) => (_repository) = (repository);
+    public MatterProfessorService(IMatterProfessorRepository repository,
+        IGradesRepository gradeRepository) => (_repository, _gradeRepository) = (repository, gradeRepository);
 
     public async Task<bool> Delete(int id)
     {
-        if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);
+        if (id == 0) throw new Exception(Messages.ID_CANNOT_BE_RESET);       
 
         var obj = _repository.GetById(id);
+
+        if (GradeExist(obj.Result.MatterId)) throw new Exception(Messages.ID_EXISTS);
 
         await _repository.Delete(await obj);
 
         return obj.Id > 0 ? true : false;
+    }
+
+    private bool GradeExist(int matterId)
+    {
+        return _gradeRepository.GetGradesByMatterId(matterId).Result.Count > 0 ? true : false;
     }
 
     public async Task<ICollection<MatterProfessor>> GetAll()

@@ -32,6 +32,16 @@ public class GradesEF : IGradesRepository
            .FirstAsync(x => x.Id == id);
     }
 
+    public async Task<ICollection<Grades>> GetGradesByMatterId(int matterId)
+    {
+        return await _context.Grades
+           .Include(x => x.Students)
+           .Include(x => x.Matters)
+           .Where(x => x.MatterId == matterId)
+           .OrderBy(x => x.Matters.Name)
+           .ToListAsync();
+    }
+
     public async Task<ICollection<Grades>> GetGradesByStudentId(int studentId)
     {
         return await _context.Grades

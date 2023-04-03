@@ -6,8 +6,6 @@ using SchoolAPI.Data.Dto.MatterProfessor;
 using SchoolAPI.Data.Dto.Professor;
 using SchoolAPI.Data.Dto.Student;
 using SchoolAPI.Data.Model;
-using System.Reflection;
-using System.Xml;
 
 namespace SchoolAPI.Profiles;
 
