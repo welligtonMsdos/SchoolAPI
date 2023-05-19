@@ -36,4 +36,6 @@ public class PostUpdateAddressDto
     [MaxLength(2)]
     [RegularExpression(@"[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", ErrorMessage = "Use only alphabetic characters")]
     public string Uf { get; set; }
+
+    public DateTime DataCriacao { get; set; }
 }
